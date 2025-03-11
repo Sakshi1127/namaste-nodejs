@@ -2,7 +2,7 @@ const express = require("express")
 
 const app =express()
 
-
+//request handler functions
 app.use("/test", (req,res)=>{
     res.send("This is the test url");
 })
