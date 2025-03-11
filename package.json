@@ -1,0 +1,19 @@
+{
+  "name": "devtinderbackend",
+  "version": "1.0.0",
+  "description": "Tender for developers",
+  "main": "index.js",
+  "scripts": {
+    "start":"node src/app.js",
+    "dev":"nodemon src/app.js"
+  },
+  "keywords": [
+    "Javascript",
+    "nodejs"
+  ],
+  "author": "Sakshi Maheshwari",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
