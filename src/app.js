@@ -2,19 +2,16 @@ const express = require("express")
 
 const app =express()
 
-
-app.get("/user",(req,res)=>{
-    res.send({firstname:'sakshi',lastname:'maheshwari'})
-})
-
-app.post("/user",(req,res)=>{
-    res.send("Data is saved successfully")
-})
+// app.get("/user",(req,res)=>{
+//     console.log(req.query)
+//     res.send("Hello")
+// })
 
 
-app.delete("/user",(req,res)=>{
-    res.send("Data is Deleted  successfully")
-})
+// app.get("/user/:userId",(req,res)=>{
+//     console.log(req.params)
+//     res.send("Hello")
+// })
 
 
 app.listen(3001,()=>{
