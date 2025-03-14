@@ -2,24 +2,24 @@ const express = require("express")
 
 const app =express()
 
-//route handlers
+const {adminAuth,userAuth}=require("./middlewares/auth")
 
-// app.use("route",[rh1,rh2,rh3,rh4])   we call write like this
+app.use("/admin",adminAuth)
 
-// app.use("route",[rh1,rh2],rh3,rh4)
+app.use("/admin/getData",(req,res)=>{
+        res.send("All Data Sent")
+})
 
+app.use("/admin/deleteUser",(req,res)=>{
+        res.send("Delete user successfully")
+})
 
-app.use('/user',(req,res,next)=>{
-    console.log("Route handler 1")
-    // res.send('Route handler 1')
-    next()
-},(req,res,next)=>{
-    console.log('rh2')
-    // res.send('Route handler 2')
-    next()
-},(req,res)=>{
-    console.log('rh3')
-    res.send('Route handler 3')
+app.use("/user/login",(req,res)=>{
+    res.send("User log in successfully")
+})
+
+app.use("/user",userAuth,(req,res)=>{
+    res.send("All Data Sent to user")
 })
 
 
