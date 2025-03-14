@@ -1,28 +1,25 @@
-const express = require("express")
+const express= require("express")
+const app=express()
 
-const app =express()
+//error-handling
 
-const {adminAuth,userAuth}=require("./middlewares/auth")
-
-app.use("/admin",adminAuth)
-
-app.use("/admin/getData",(req,res)=>{
-        res.send("All Data Sent")
+app.use("/getUserData",(req,res)=>{
+    try{
+    throw new Error("Error happened")
+    }catch(err){
+        res.status(500).send("Somehting went wrong......!!")
+    }
 })
 
-app.use("/admin/deleteUser",(req,res)=>{
-        res.send("Delete user successfully")
-})
 
-app.use("/user/login",(req,res)=>{
-    res.send("User log in successfully")
+//we need to handdle this gracefully by write a error-handler
+//always write error-handle at the end
+app.use("/",(err,req,res,next)=>{
+     if(err){
+        res.status(500).send("Somehting went wrong!!")
+     }
 })
-
-app.use("/user",userAuth,(req,res)=>{
-    res.send("All Data Sent to user")
-})
-
 
 app.listen(3001,()=>{
-    console.log('Server is listening on port 3001...')
+    console.log('Server is running on port 3001.....')
 })
