@@ -1,25 +1,32 @@
 const express= require("express")
 const app=express()
+const connectDB =require("./config/database")
+const User=require("./models/user")
 
-//error-handling
 
-app.use("/getUserData",(req,res)=>{
-    try{
-    throw new Error("Error happened")
-    }catch(err){
-        res.status(500).send("Somehting went wrong......!!")
-    }
+app.post("/signup",async(req,res)=>{
+   const user= new User({
+    firstName:'Punit',
+    lastName:'Mehta',
+    emailId:'punit@gamil.com',
+    password:'punit@123'
+   })
+
+   try{
+    await user.save()
+    res.send("User added successfully..")
+   } catch(err){
+    res.status(400).send("Error savong the user:" + err.message)
+   }
 })
 
 
-//we need to handdle this gracefully by write a error-handler
-//always write error-handle at the end
-app.use("/",(err,req,res,next)=>{
-     if(err){
-        res.status(500).send("Somehting went wrong!!")
-     }
+connectDB().then(()=>{
+    console.log('Database connection established...')
+    app.listen(3001,()=>{
+        console.log('Server is running on port 3001.....')
+    })
+}).catch(()=>{
+    console.log('Database can not be connected!!')
 })
 
-app.listen(3001,()=>{
-    console.log('Server is running on port 3001.....')
-})
