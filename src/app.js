@@ -17,6 +17,47 @@ app.post("/signup",async(req,res)=>{
    }
 })
 
+//get user by email
+// app.get("/user",async(req,res)=>{
+//     const userEmail = req.body.emailId
+//     try{
+//         const user = await User.find({emailId:userEmail})
+//         if(user.length === 0){
+//             res.status(404).send("User not found")
+//         }else{
+//         res.send(user)
+//         }
+//     }catch{
+//         res.status(404).send("Something went wrong")
+//     }
+// })
+
+//get user by email if twoo user has same eamil then we only find one
+app.get("/user",async(req,res)=>{
+    const userEmail= req.body.emailId
+   try{
+      const user= await User.findOne({emailId:userEmail})
+      if(!user){
+        res.status(404).send("User not found")
+      }else{
+        res.send(user)
+      }
+   }catch{
+    res.status(404).send("something went wrong")
+   }
+})
+
+//FeedAPI  - GET /feed - get all the usersfrom the database
+app.get("/feed",async (req,res)=>{
+  try{
+    const user= await User.find({})
+    res.send(user)
+
+  }catch{
+    res.status(404).send("Something went wrong")
+
+  }
+})
 
 connectDB().then(()=>{
     console.log('Database connection established...')
