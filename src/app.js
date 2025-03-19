@@ -72,29 +72,29 @@ app.delete("/user",async(req,res)=>{
 })
 
 //update the user
+app.patch("/user",async(req,res)=>{
+  const userId=req.body.userId
+  const data=req.body
+  try{
+    const user= await User.findByIdAndUpdate(userId,data,{runValidators:true})
+    res.send("User Updated Successfully")
+  }catch(err){
+    res.status(404).send("Something Went wrong" + err.message)
+  }
+})
+
+//update by email Id
 // app.patch("/user",async(req,res)=>{
-//   const userId=req.body.userId
-//   const data=req.body
+//   const userEmail= {emailId:req.body.emailId}
+//   const data =req.body
+
 //   try{
-//     const user= await User.findByIdAndUpdate(userId,data)
-//     res.send("User Updated Successfully")
+//     const user = await User.findOneAndUpdate(userEmail,data) 
+//     res.send("User updated")
 //   }catch{
 //     res.status(404).send("Something Went wrong")
 //   }
 // })
-
-//update by email Id
-app.patch("/user",async(req,res)=>{
-  const userEmail= {emailId:req.body.emailId}
-  const data =req.body
-
-  try{
-    const user = await User.findOneAndUpdate(userEmail,data) 
-    res.send("User updated")
-  }catch{
-    res.status(404).send("Something Went wrong")
-  }
-})
 
 connectDB().then(()=>{
     console.log('Database connection established...')
