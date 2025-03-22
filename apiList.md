@@ -12,6 +12,12 @@
 -PTACH /profile/edit
 -PATCH  /profile/password
 
+cuurentPassword UpdatePassword
+ currentPaassword match user ke original password se    true
+
+ updatePassword is that strong or not if it is then update 
+ updatePaaswaor is not equal to current password 
+
 ## connectionRequestRouter
 -POST /request/send/interested/:userId
 -POST /request/send/ignored/;userId
