@@ -19,14 +19,26 @@ cuurentPassword UpdatePassword
  updatePaaswaor is not equal to current password 
 
 ## connectionRequestRouter
--POST /request/send/interested/:userId
--POST /request/send/ignored/;userId
--POST /request/review/accepted/:requestId
--POST /request/review/rejected/:requestId
+-POST /request/send/:status/:userId   (there is one api for interested and ignored)
+
+1) create connection request  collection in Db --- fromUserId,toUserId,status(add enum) ,timestamps
+2) craete a post api with userAuth middleware
+3) validation 
+   1) status check 
+   2) if there is an already existing connection request
+       1) koi phele se same request exist nhi kr rhi
+       2) ki sakshi ne punit ko bheji hai to punit ko sakshi nhi bhej skta
+   3) touserId is present in DB or not 
+   4) fromUsedId is not equal touserId 
+
+
+
+-POST /request/review/:status/:requestId  (there is one api for accepted and rejected)
 
 ## userRouter
--GET /user/connections
 -GET  /user/request/received
+
+-GET /user/connections
 -GET /user/feed   (gets you the profile of the other user)
 
 
